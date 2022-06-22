@@ -1,0 +1,135 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct kontak{
+	char nama[20];
+	int nomor;
+	struct kontak *next;
+};
+struct kontak *ujung;
+kontak *head, *current, *tail;
+
+void menu();
+void init(){
+	head=NULL;
+}
+
+void tambah_kontak(){
+	struct kontak *tampung, *awal;
+	int j, jumlah;
+	printf("\nMasukkan jumlah kontak : ");
+	scanf("%d", &jumlah);
+	for(j=0;j<jumlah;j++){
+		awal=(struct kontak*)malloc(sizeof(struct kontak));
+		fflush(stdin);
+		printf("Nama : " ); scanf("%s", &awal->nama);
+		printf("Nomor telp. : "); scanf("%d", &awal->nomor);
+		awal->next=ujung;
+
+		if(j==0){
+			ujung=awal;
+			tampung=ujung;
+		}else{
+			tampung->next=awal;
+			tampung=tampung->next;
+		}
+	}
+	menu();
+}
+
+void keluar(){
+	struct kontak *hapus; struct kontak *sblhapus;
+	char cari[20];
+	if (ujung == NULL)
+	printf("List Belum Terbentuk. Buatlah Dulu!");
+	else{
+		printf("Data yang akan dihapus? (nama) : ");
+		scanf("%s", &cari);
+		hapus = ujung;
+		if(strcmp(hapus->nama,cari)==0){
+			ujung = ujung->next;
+			free(hapus);
+		}else{
+			while(strcmp(hapus->nama,cari)!=0){
+				sblhapus=hapus;
+				hapus=hapus->next;
+			}
+			if (hapus->next == NULL){
+				sblhapus->next=NULL;
+				free(hapus);
+			}else{
+				sblhapus->next = hapus->next;
+				free(hapus);
+			}
+		}
+	}
+	menu();
+}
+
+void delAll(){
+	while(ujung!=NULL){
+		current=ujung;
+		if(ujung=NULL){
+			printf("Data belum ada\n");
+		}
+		else if(ujung==tail){
+			ujung=tail=NULL;
+			free(current);
+		}
+		else{
+		ujung=ujung->next;
+		free(current);
+		}
+	}
+	printf("Data dikosongkan\n");
+}
+
+void daftar_kontak(){
+	struct kontak *tampil;
+	printf("\n\t===Daftar kontak===\n");
+	printf("Nama\tNomor Telepon\n");
+	tampil = ujung;
+		while(tampil!=NULL){
+		printf("%s\t%d\n", tampil->nama, tampil->nomor);
+		tampil=tampil->next;
+	}
+	menu();	
+}
+
+void menu(){
+	int a;
+	printf("\n PILIHAN MENU : \n");
+	printf("======================= \n");
+	printf("1. Tambah kontak\n");
+	printf("2. Hapus kontak\n");
+	printf("3. Hapus semua kontak\n");
+	printf("4. Daftar kontak\n");
+	printf("======================= \n");
+	printf("Pilih nomor : ");
+	scanf("%d", &a);
+
+	switch(a){
+		case 1:
+			tambah_kontak();
+			break;
+		case 2 :
+			keluar();
+			break;
+		case 3:
+			delAll();
+			break;
+		case 4:
+			daftar_kontak();
+			break;
+		default:
+			exit (0);
+			break;
+	}
+}
+
+int main(){
+	printf("PROGRAM MENU KONTAK TELEPON");
+	printf("\nby Kelompok 3\n");
+	menu();
+}
