@@ -1,0 +1,91 @@
+body {
+    font: 1em/150% Arial, Helvetica, sans-serif;
+    background-image: url(background.jpg);
+    background-size: cover;
+    height: 100%;
+}
+#nav{
+    width: 98%;
+    background: linear-gradient(to right, #535353, #fff);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+ul{
+    display: inline;
+}
+li{
+    display: inline-block;
+    padding-left: 7px;
+}
+.search1{
+    float: right;
+    width: 200px;
+    height: 30px;
+    border-radius: 30px;
+}
+.search2{
+    display: none;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+@media \0screen {
+    img {
+        width: auto;
+    }
+}
+#content, #sidebar, #sidebar2{ 
+    background: #f8f8f8;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 3px 10px;
+}
+#sidebar2 img{
+    height: 120px;
+    width: 120px;
+}
+/*******STRUCTURE*******/
+#content {
+    width: 50%;
+    float: left;
+    margin-bottom: 20px;
+    padding-bottom: 50px;
+} 
+#sidebar, #sidebar2 {
+    width: 40%;
+    float: right;
+} 
+/*******MEDIA QUERIES*******/
+/* untuk ukuran 980px atau di bawahnya */ 
+@media screen and (max-width: 980px) { 
+    #content {
+        width: 60%;
+    }
+    #sidebar, #sidebar2 {
+        width: 30%;
+    }
+}
+/* untuk ukuran 700px atau di bawahnya */ 
+@media screen and (max-width: 700px) {
+    #content {
+        margin-top: 10px;
+        width: auto;
+        float: none;
+    }
+    #sidebar, #sidebar2 {
+        width: auto;
+        float: none;
+    }
+    #nav{
+        width: 95%;
+    }
+    .search1{
+        display: none;
+    }
+    .search2{
+        padding-left: 60%;
+        display: inline-flex;
+    }
+}
